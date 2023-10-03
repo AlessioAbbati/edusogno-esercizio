@@ -1,8 +1,9 @@
 <?php
+
 include "db_connection.php";
 session_start();
 
-if (isset($_SESSION['id']) && isset($_SESSION['nome'])) {
+if (isset($_SESSION['id']) && isset($_SESSION['nome']) && isset($_SESSION['cognome']) && isset($_SESSION['email'])) {
 
     // Query SQL per recuperare gli eventi dell'utente autenticato
     $userEmail = $_SESSION['email'];
@@ -26,10 +27,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['nome'])) {
 
 <body>
     <h1>Ciao, <?php echo $_SESSION['nome']; ?> <?php echo $_SESSION['cognome']; ?> ecco i tuoi eventi</h1>
+    <a href="logout.php">Logout</a>
 
     <?php
-        // Stampare gli eventi come card
-        while ($row = mysqli_fetch_assoc($result)) {
+        // Verifica se ci sono eventi da mostrare
+        if (mysqli_num_rows($result) > 0) {
+            // Ci sono eventi, stampali come card
+            while ($row = mysqli_fetch_assoc($result)) {
+                if (!empty($userEmail) && strpos($row['attendees'], $userEmail) !== false) {
+                    // L'evento contiene l'email dell'utente loggato, stampalo
     ?>
     <div class="card">
         <div class="card-body">
@@ -39,9 +45,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['nome'])) {
         </div>
     </div>
     <?php
+                }
+            }
+            // Rilascia la risorsa del risultato
+            mysqli_free_result($result);
+        } else {
+            // Nessun evento
+            echo "Nessun evento";
         }
-        // Rilascia la risorsa del risultato
-        mysqli_free_result($result);
     } else {
         echo "Errore nella query: " . mysqli_error($conn);
     }
@@ -51,10 +62,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['nome'])) {
 
 </html>
 <?php
+} else {
+    // Utente non autenticato, gestisci il caso in base alle tue esigenze
 }
 ?>
-
-
-
-
-

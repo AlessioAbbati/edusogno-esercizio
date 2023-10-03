@@ -25,7 +25,7 @@
 
         <button type="submit">Login</button>
 
-        <p>Non hai ancora un profilo? </p>
+        <p>Non hai ancora un profilo? <a href="register.php">Registrati</a></p>
     </form>
 
 </body>
