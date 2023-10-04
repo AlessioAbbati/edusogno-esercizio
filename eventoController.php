@@ -23,7 +23,6 @@ class EventoController {
     
 
     public function getEventi() {
-        $eventi = array();
     
         // Query SQL per recuperare gli eventi dal database
         $sql = "SELECT * FROM eventi";

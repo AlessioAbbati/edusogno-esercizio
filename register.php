@@ -86,6 +86,9 @@ if (isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['email']) 
 
         <button type="submit">Registrati</button>
 
+        <p>Hai gia un account? <a href="login.php">Accedi</a></p>
+        
+
     </form>
 
 </body>
