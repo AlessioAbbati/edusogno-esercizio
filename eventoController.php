@@ -41,12 +41,20 @@ class EventoController {
         return $eventi;
     }
 
-    public function modificaEvento($indice, $nome_evento, $attendees, $data_evento) {
-        if (isset($this->eventi[$indice])) {
-            // Modifica l'evento esistente
-            $this->eventi[$indice]->setNomeEvento($nome_evento);
-            $this->eventi[$indice]->setAttendees($attendees);
-            $this->eventi[$indice]->setDataEvento($data_evento);
+    public function modificaEvento($id_evento, $nome_evento, $attendees, $data_evento) {
+        // Aggiorna l'evento nel database
+        $this->aggiornaEventoNelDatabase($id_evento, $nome_evento, $attendees, $data_evento);
+    }
+    
+
+    private function aggiornaEventoNelDatabase($id_evento, $nome_evento, $attendees, $data_evento) {
+        // Query SQL per aggiornare l'evento nel database
+        $sql = "UPDATE eventi SET nome_evento = '$nome_evento', attendees = '$attendees', data_evento = '$data_evento' WHERE id = $id_evento";
+    
+        if (mysqli_query($this->conn, $sql)) {
+            echo "Evento aggiornato con successo nel database.";
+        } else {
+            echo "Errore nell'aggiornamento dell'evento nel database: " . mysqli_error($this->conn);
         }
     }
 

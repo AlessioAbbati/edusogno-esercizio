@@ -79,7 +79,9 @@ $eventi = $controllerEvento->getEventi();
             <label>Data e Ora dell'Evento:</label>
             <input type="datetime-local" name="data_evento" required><br>
             <button type="submit">Aggiungi Evento</button>
-        </form> 
+        </form>
+
+
 
         <h2>Elenco Eventi</h2>
         <ul>
@@ -92,13 +94,15 @@ $eventi = $controllerEvento->getEventi();
                 <input type="hidden" name="action" value="edit">
                 <input type="hidden" name="id_evento" value="<?php echo $evento->getId(); ?>">
                 <label>Nuovo Nome Evento:</label>
-                <input type="text" name="nome_evento" placeholder="Nuovo Nome Evento">
-                <label>Attendees:</label>
-                <input type="email" name="attendees" placeholder="Nuovi Partecipanti">
+                <input type="text" name="nome_evento" value="<?php echo $evento->getNomeEvento(); ?>" placeholder="Nuovo Nome Evento">
+                <label>Nuovi Attendees:</label>
+                <input type="email" name="attendees" value="<?php echo $evento->getAttendees(); ?>" placeholder="Nuovi Partecipanti">
                 <label>Nuova Data e Ora dell'Evento:</label>
-                <input type="datetime-local" name="data_evento" placeholder="Nuova Data e Ora">
+                <input type="datetime-local" name="data_evento" value="<?php echo date("Y-m-d\TH:i:s", strtotime($evento->getDataEvento())); ?>" placeholder="Nuova Data e Ora">
                 <button type="submit">Modifica</button>
             </form>
+
+
             <form action="admin_dashboard.php" method="post" style="display: inline;">
                 <input type="hidden" name="action" value="delete">
                 <input type="hidden" name="indice" value="<?php echo $indice; ?>">
