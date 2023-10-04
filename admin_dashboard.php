@@ -61,6 +61,7 @@ $eventi = $controllerEvento->getEventi();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="assets/styles/style.css"> -->
     <title>Pannello di Amministrazione</title>
 </head>
 
@@ -93,11 +94,11 @@ $eventi = $controllerEvento->getEventi();
             <form action="admin_dashboard.php" method="post" style="display: inline;">
                 <input type="hidden" name="action" value="edit">
                 <input type="hidden" name="id_evento" value="<?php echo $evento->getId(); ?>">
-                <label>Nuovo Nome Evento:</label>
+                <label for="nome_evento">Nuovo Nome Evento:</label>
                 <input type="text" name="nome_evento" value="<?php echo $evento->getNomeEvento(); ?>" placeholder="Nuovo Nome Evento">
-                <label>Nuovi Attendees:</label>
+                <label for="attendees">Nuovi Attendees:</label>
                 <input type="email" name="attendees" value="<?php echo $evento->getAttendees(); ?>" placeholder="Nuovi Partecipanti">
-                <label>Nuova Data e Ora dell'Evento:</label>
+                <label for="data_evento">Nuova Data e Ora dell'Evento:</label>
                 <input type="datetime-local" name="data_evento" value="<?php echo date("Y-m-d\TH:i:s", strtotime($evento->getDataEvento())); ?>" placeholder="Nuova Data e Ora">
                 <button type="submit">Modifica</button>
             </form>
