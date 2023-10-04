@@ -24,17 +24,17 @@ if ($_SESSION['admin'] === true) {
                     $nome_evento = $_POST['nome_evento'];
                     $attendees = $_POST['attendees'];
                     $data_evento = $_POST['data_evento'];
-                    $controllerEvento->aggiungiEvento($id, $nome_evento, $attendees, $data_evento);
+                    $controllerEvento->aggiungiEvento($nome_evento, $attendees, $data_evento);
                 }
                 break;
 
             case 'edit':
-                if (isset($_POST['indice']) && isset($_POST['nome_evento']) && isset($_POST['attendees']) && isset($_POST['data_evento'])) {
-                    $indice = $_POST['indice'];
+                if (isset($_POST['id_evento']) && isset($_POST['nome_evento']) && isset($_POST['attendees']) && isset($_POST['data_evento'])) {
+                    $id_evento = $_POST['id_evento'];
                     $nome_evento = $_POST['nome_evento'];
                     $attendees = $_POST['attendees'];
                     $data_evento = $_POST['data_evento'];
-                    $controllerEvento->modificaEvento($indice, $nome_evento, $attendees, $data_evento);
+                    $controllerEvento->modificaEvento($id_evento, $nome_evento, $attendees, $data_evento);
                 }
                 break;
 
@@ -74,27 +74,27 @@ $eventi = $controllerEvento->getEventi();
             <input type="hidden" name="action" value="add">
             <label>Nome Evento:</label>
             <input type="text" name="nome_evento" required><br>
-            <label>Partecipanti (Attendees):</label>
-            <input type="text" name="attendees" required><br>
+            <label>Attendees (Email):</label>
+            <input type="email" name="attendees" required><br>
             <label>Data e Ora dell'Evento:</label>
             <input type="datetime-local" name="data_evento" required><br>
             <button type="submit">Aggiungi Evento</button>
-        </form>
+        </form> 
 
         <h2>Elenco Eventi</h2>
         <ul>
     <?php foreach ($eventi as $indice => $evento) { ?>
         <li>
             <strong>Nome Evento:</strong> <?php echo $evento->getNomeEvento(); ?><br>
-            <strong>Partecipanti (Attendees):</strong> <?php echo $evento->getAttendees(); ?><br>
+            <strong>Attendees:</strong> <?php echo $evento->getAttendees(); ?><br>
             <strong>Data e Ora dell'Evento:</strong> <?php echo $evento->getDataEvento(); ?><br>
             <form action="admin_dashboard.php" method="post" style="display: inline;">
                 <input type="hidden" name="action" value="edit">
-                <input type="hidden" name="indice" value="<?php echo $indice; ?>">
+                <input type="hidden" name="id_evento" value="<?php echo $evento->getId(); ?>">
                 <label>Nuovo Nome Evento:</label>
                 <input type="text" name="nome_evento" placeholder="Nuovo Nome Evento">
-                <label>Nuovi Partecipanti (Attendees):</label>
-                <input type="text" name="attendees" placeholder="Nuovi Partecipanti">
+                <label>Attendees:</label>
+                <input type="email" name="attendees" placeholder="Nuovi Partecipanti">
                 <label>Nuova Data e Ora dell'Evento:</label>
                 <input type="datetime-local" name="data_evento" placeholder="Nuova Data e Ora">
                 <button type="submit">Modifica</button>

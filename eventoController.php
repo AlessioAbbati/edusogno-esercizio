@@ -10,14 +10,17 @@ class EventoController {
         $this->conn = $conn;
     }
 
-    public function aggiungiEvento($id, $nome_evento, $attendees, $data_evento) {
+    public function aggiungiEvento($nome_evento, $attendees, $data_evento) {
         // Crea una nuova istanza di Evento e aggiungila alla lista degli eventi
-        $evento = new Evento($id, $nome_evento, $attendees, $data_evento);
+        $evento = new Evento(null, $nome_evento, $attendees, $data_evento); // Rimuovi $id
         $this->eventi[] = $evento;
     
         // Inserisci l'evento nel database
-        $this->inserisciEventoNelDatabase($id, $nome_evento, $attendees, $data_evento);
+        $this->inserisciEventoNelDatabase($nome_evento, $attendees, $data_evento); // Rimuovi $id
     }
+    
+    
+    
 
     public function getEventi() {
         $eventi = array();
@@ -93,6 +96,7 @@ class EventoController {
         $uname = "root";
         $password = "root";
         $db_name = "edusogno";
+        $data_evento = date("Y-m-d H:i:s", strtotime($data_evento));
 
         // Connessione al database
         $conn = mysqli_connect($sname, $uname, $password, $db_name);
