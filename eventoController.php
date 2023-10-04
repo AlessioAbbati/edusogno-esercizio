@@ -10,13 +10,13 @@ class EventoController {
         $this->conn = $conn;
     }
 
-    public function aggiungiEvento($nome_evento, $attendees, $data_evento) {
+    public function aggiungiEvento($id, $nome_evento, $attendees, $data_evento) {
         // Crea una nuova istanza di Evento e aggiungila alla lista degli eventi
-        $evento = new Evento($nome_evento, $attendees, $data_evento);
+        $evento = new Evento($id, $nome_evento, $attendees, $data_evento);
         $this->eventi[] = $evento;
-
+    
         // Inserisci l'evento nel database
-        $this->inserisciEventoNelDatabase($nome_evento, $attendees, $data_evento);
+        $this->inserisciEventoNelDatabase($id, $nome_evento, $attendees, $data_evento);
     }
 
     public function getEventi() {
@@ -29,7 +29,7 @@ class EventoController {
         if ($result) {
             while ($row = mysqli_fetch_assoc($result)) {
                 // Creazione di oggetti Evento e aggiunta all'array $eventi
-                $evento = new Evento($row['nome_evento'], $row['attendees'], $row['data_evento']);
+                $evento = new Evento($row['id'], $row['nome_evento'], $row['attendees'], $row['data_evento']);
                 $eventi[] = $evento;
             }
             mysqli_free_result($result);
@@ -47,12 +47,45 @@ class EventoController {
         }
     }
 
-    public function eliminaEvento($indice) {
-        if (isset($this->eventi[$indice])) {
-            // Rimuovi l'evento dalla lista
-            array_splice($this->eventi, $indice, 1);
+    public function eliminaEvento($idDaEliminare) {
+        // Elimina l'evento dalla lista (se esiste)
+        foreach ($this->eventi as $indice => $evento) {
+            if ($evento->getId() === $idDaEliminare) {
+                unset($this->eventi[$indice]);
+                break; // Esci dal ciclo una volta trovato l'evento da eliminare
+            }
+        }
+    
+        // Elimina l'evento dal database
+        $this->eliminaEventoDalDatabase($idDaEliminare);
+    }
+    
+    
+    private function trovaIdEventoDalDatabase($evento) {
+        // Query SQL per trovare l'ID dell'evento in base a nome e data
+        $sql = "SELECT id FROM eventi WHERE nome_evento = '{$evento->getNomeEvento()}' AND data_evento = '{$evento->getDataEvento()}'";
+    
+        $result = mysqli_query($this->conn, $sql);
+    
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            return $row['id'];
+        }
+    
+        return false;
+    }
+    
+    private function eliminaEventoDalDatabase($idDaEliminare) {
+        // Query SQL per eliminare l'evento dal database
+        $sql = "DELETE FROM eventi WHERE id = $idDaEliminare";
+        
+        if (mysqli_query($this->conn, $sql)) {
+            echo "Evento eliminato con successo dal database.";
+        } else {
+            echo "Errore nell'eliminazione dell'evento dal database: " . mysqli_error($this->conn);
         }
     }
+    
 
     private function inserisciEventoNelDatabase($nome_evento, $attendees, $data_evento) {
         // Configurazione del database

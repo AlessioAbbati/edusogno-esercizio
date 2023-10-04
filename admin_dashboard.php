@@ -24,12 +24,12 @@ if ($_SESSION['admin'] === true) {
                     $nome_evento = $_POST['nome_evento'];
                     $attendees = $_POST['attendees'];
                     $data_evento = $_POST['data_evento'];
-                    $controllerEvento->aggiungiEvento($nome_evento, $attendees, $data_evento);
+                    $controllerEvento->aggiungiEvento($id, $nome_evento, $attendees, $data_evento);
                 }
                 break;
 
             case 'edit':
-                if (isset($_POST['indice']) && isset($_POST['nome_evento']) && isset($_POST['attendees']) && isset($_POST['data_evento']) && isset($_POST['descrizione'])) {
+                if (isset($_POST['indice']) && isset($_POST['nome_evento']) && isset($_POST['attendees']) && isset($_POST['data_evento'])) {
                     $indice = $_POST['indice'];
                     $nome_evento = $_POST['nome_evento'];
                     $attendees = $_POST['attendees'];
@@ -39,9 +39,11 @@ if ($_SESSION['admin'] === true) {
                 break;
 
             case 'delete':
-                if (isset($_POST['indice'])) {
-                    $indice = $_POST['indice'];
-                    $controllerEvento->eliminaEvento($indice);
+                if (isset($_POST['action']) && $_POST['action'] === 'delete') {
+                    if (isset($_POST['id_evento'])) {
+                        $idDaEliminare = $_POST['id_evento'];
+                        $controllerEvento->eliminaEvento($idDaEliminare);
+                    }
                 }
                 break;
         }
@@ -81,27 +83,33 @@ $eventi = $controllerEvento->getEventi();
 
         <h2>Elenco Eventi</h2>
         <ul>
-            <?php foreach ($eventi as $indice => $evento) { ?>
-                <li>
-                    <strong><?php echo $evento->getNomeEvento(); ?></strong>
-                    (Partecipanti: <?php echo $evento->getAttendees(); ?>)
-                    - Data e Ora: <?php echo $evento->getDataEvento(); ?>
-                    <form action="admin_dashboard.php" method="post" style="display: inline;">
-                        <input type="hidden" name="action" value="edit">
-                        <input type="hidden" name="indice" value="<?php echo $indice; ?>">
-                        <input type="text" name="nome_evento" placeholder="Nuovo Nome Evento">
-                        <input type="text" name="attendees" placeholder="Nuovi Partecipanti">
-                        <input type="datetime-local" name="data_evento" placeholder="Nuova Data e Ora">
-                        <button type="submit">Modifica</button>
-                    </form>
-                    <form action="admin_dashboard.php" method="post" style="display: inline;">
-                        <input type="hidden" name="action" value="delete">
-                        <input type="hidden" name="indice" value="<?php echo $indice; ?>">
-                        <button type="submit">Elimina</button>
-                    </form>
-                </li>
-            <?php } ?>
-        </ul>
+    <?php foreach ($eventi as $indice => $evento) { ?>
+        <li>
+            <strong>Nome Evento:</strong> <?php echo $evento->getNomeEvento(); ?><br>
+            <strong>Partecipanti (Attendees):</strong> <?php echo $evento->getAttendees(); ?><br>
+            <strong>Data e Ora dell'Evento:</strong> <?php echo $evento->getDataEvento(); ?><br>
+            <form action="admin_dashboard.php" method="post" style="display: inline;">
+                <input type="hidden" name="action" value="edit">
+                <input type="hidden" name="indice" value="<?php echo $indice; ?>">
+                <label>Nuovo Nome Evento:</label>
+                <input type="text" name="nome_evento" placeholder="Nuovo Nome Evento">
+                <label>Nuovi Partecipanti (Attendees):</label>
+                <input type="text" name="attendees" placeholder="Nuovi Partecipanti">
+                <label>Nuova Data e Ora dell'Evento:</label>
+                <input type="datetime-local" name="data_evento" placeholder="Nuova Data e Ora">
+                <button type="submit">Modifica</button>
+            </form>
+            <form action="admin_dashboard.php" method="post" style="display: inline;">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="indice" value="<?php echo $indice; ?>">
+                <input type="hidden" name="id_evento" value="<?php echo $evento->getId(); ?>">
+                <button type="submit">Elimina</button>
+            </form>
+        </li>
+    <?php } ?>
+</ul>
+
+
     <?php } else { ?>
         <p>Accesso negato. Questa pagina è riservata agli amministratori.</p>
     <?php } ?>
