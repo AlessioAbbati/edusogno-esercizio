@@ -60,29 +60,30 @@ if (isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['email']) 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/styles/style.css">
+    <link rel="stylesheet" href="assets/styles/logStyle.css">
     <title>Register</title>
 </head>
 
 <body>
+    <h1>Crea il tuo account</h1>
     <form action="" method="post">
-        <h1>Register</h1>
+        
 
         <?php if (isset($_GET['error'])) { ?>
             <p class="error"><?php echo $_GET['error']; ?></p>
         <?php } ?>
 
-        <label>Nome</label>
-        <input type="text" name="nome" placeholder="nome"><br>
+        <label>Inserisci il nome</label>
+        <input type="text" name="nome" placeholder="Mario"><br>
 
-        <label>Cognome</label>
-        <input type="text" name="cognome" placeholder="cognome"><br>
+        <label>Inserisci il cognome</label>
+        <input type="text" name="cognome" placeholder="Rossi"><br>
 
-        <label>Email</label>
-        <input type="email" name="email" placeholder="email"><br>
+        <label>Inserisci l'e-mail</label>
+        <input type="email" name="email" placeholder="name@example.com"><br>
 
-        <label>Password</label>
-        <input type="password" name="password" placeholder="Password"><br>
+        <label>Inserisci la password</label>
+        <input type="password" name="password" placeholder="Scrivila qui"><br>
 
         <button type="submit">Registrati</button>
 

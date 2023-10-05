@@ -2,8 +2,9 @@ body {
     background: #1690A7;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center;    
     height: 100vh;
+    flex-direction: column;
 }
 
 * {
@@ -17,6 +18,8 @@ form {
     padding: 30px;
     background: #fff;
     border-radius: 15px;
+    display: flex;
+    flex-direction: column;
 }
 
 h2 {
@@ -36,18 +39,20 @@ input {
 label {
     color: #888;
     font-size: 18px;
-    padding: 10px;
 }
 
 button {
-    float: right;
-    background: #555;
-    padding: 10px 15px;
+    background-color: #0066ff;
     color: #fff;
-    border-radius: 5px;
-    margin-right: 10px;
-    border: none;
+    border: 0;
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color .3s ease;
 }
+
 button:hover {
     opacity: .7;
 }
@@ -59,5 +64,10 @@ button:hover {
     width: 95%;
     border-radius: 5px;
     margin: 20px auto;
+}
+
+p {
+    font-size: .7rem;
+    align-self: center;
 }
 
