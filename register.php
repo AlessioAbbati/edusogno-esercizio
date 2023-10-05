@@ -66,7 +66,7 @@ if (isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['email']) 
 </head>
 
 <body>
-    <h1>Crea il tuo account</h1>
+    <h1 class="reg">Crea il tuo account</h1>
     <form action="" method="post">
         
 
