@@ -36,7 +36,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['nome']) && isset($_SESSION['cogno
         exit(); // Gestisci l'errore come preferisci
     }
 
-    ?>
+?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -45,54 +45,58 @@ if (isset($_SESSION['id']) && isset($_SESSION['nome']) && isset($_SESSION['cogno
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="assets/styles/style.css">
+        <link rel="stylesheet" href="assets/styles/homeStyle.css">
         <title>Home</title>
     </head>
 
     <body>
         <h1>Ciao, <?php echo $_SESSION['nome']; ?> <?php echo $_SESSION['cognome']; ?> ecco i tuoi eventi</h1>
-        <a href="logout.php">Logout</a>
+        <div class="buttons">
+            <button><a href="logout.php">Logout</a></button>
 
-        <?php
-        if ($isAdmin) {
-            ?>
-            <a href="admin_dashboard.php">Pannello di Amministrazione</a>
             <?php
-        } else {
+            if ($isAdmin) {
             ?>
-            <a href="javascript:void(0)" onclick="alert('Non sei un amministratore')">Pannello di Amministrazione</a>
+                <button><a href="admin_dashboard.php">Pannello di Amministrazione</a></button>
             <?php
-        }
-        ?>
+            } else {
+            ?>
+                <button><a href="javascript:void(0)" onclick="alert('Non sei un amministratore')">Pannello di Amministrazione</a></button>
+            <?php
+            }
+            ?>
+        </div>
 
         <?php
         // Verifica se ci sono eventi da mostrare
         if (mysqli_num_rows($resultEvents) > 0) {
             // Ci sono eventi, stampali come card
-            while ($row = mysqli_fetch_assoc($resultEvents)) {
-                // L'evento contiene l'email dell'utente loggato, stampalo
-                ?>
-                <div class="card">
+        ?> <div class="cards"> <?php
+                                    while ($row = mysqli_fetch_assoc($resultEvents)) {
+                                        // L'evento contiene l'email dell'utente loggato, stampalo
+                                    ?>
+
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo $row['nome_evento']; ?></h5>
+                        <h2 class="card-title"><?php echo $row['nome_evento']; ?></h2>
                         <p class="card-text">Data: <?php echo $row['data_evento']; ?></p>
-                        <!-- Altre informazioni sugli eventi possono essere stampate qui -->
+                        <button>JOIN</button>
                     </div>
-                </div>
+
                 <?php
-            }
-            // Rilascia la risorsa del risultato
-            mysqli_free_result($resultEvents);
-        } else {
-            // Nessun evento
-            echo "Nessun evento";
-        }
-        ?>
+                                    } ?>
+            </div> <?php
+                    // Rilascia la risorsa del risultato
+                    mysqli_free_result($resultEvents);
+                } else {
+                    // Nessun evento
+                    echo "Nessun evento";
+                }
+                    ?>
 
     </body>
 
     </html>
-    <?php
+<?php
 } else {
     // Utente non autenticato, gestisci il caso in base alle tue esigenze
 }
