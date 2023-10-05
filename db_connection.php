@@ -12,3 +12,5 @@ if (!$conn) {
     echo "connection failed!";
 
 }
+
+return $conn;

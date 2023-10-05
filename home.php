@@ -54,6 +54,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['nome']) && isset($_SESSION['cogno
         <h1>Ciao, <?php echo $_SESSION['nome']; ?> <?php echo $_SESSION['cognome']; ?> ecco i tuoi eventi</h1>
         <div class="buttons">
             <button><a href="logout.php">Logout</a></button>
+            <button><a href="recupera-password.php">Cambia la tua password</a></button>
 
             <?php
             if ($isAdmin) {
