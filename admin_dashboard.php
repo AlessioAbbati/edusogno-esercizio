@@ -3,6 +3,7 @@ session_start();
 
 // Includi il file di connessione al database
 include("db_connection.php");
+include "header.php";
 
 // Simula l'autenticazione dell'amministratore (personalizza questa logica)
 $_SESSION['admin'] = true;

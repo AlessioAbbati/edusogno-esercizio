@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "db_connection.php";
+include "header.php";
 
 if (isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['email']) && isset($_POST['password'])) {
 

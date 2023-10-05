@@ -1,5 +1,6 @@
 <?php
 include "db_connection.php";
+include "header.php";
 session_start();
 
 if (isset($_SESSION['id']) && isset($_SESSION['nome']) && isset($_SESSION['cognome']) && isset($_SESSION['email'])) {
