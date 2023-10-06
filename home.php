@@ -46,7 +46,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['nome']) && isset($_SESSION['cogno
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="assets/styles/homeStyle.css?v=<?php echo time(); ?>">
+        <link rel="stylesheet" href="assets/styles/style.css?v=<?php echo time(); ?>">
         <title>Home</title>
     </head>
 

@@ -62,7 +62,7 @@ $eventi = $controllerEvento->getEventi();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/styles/dashStyle.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="assets/styles/style.css?v=<?php echo time(); ?>">
 
     <title>Pannello di Amministrazione</title>
 </head>
@@ -74,14 +74,14 @@ $eventi = $controllerEvento->getEventi();
     <?php if ($_SESSION['admin'] === true) { ?>
 
         <div class="form-box">
-            <form class="form" action="admin_dashboard.php" method="post">
+            <form class="form-dash" action="admin_dashboard.php" method="post">
                 <input type="hidden" name="action" value="add">
                 <span class="title">Aggiungi un Evento</span>
                 <span class="subtitle">Compila i campi per aggiungere un evento.</span>
                 <div class="form-container">
-                    <input type="text" class="input" name="nome_evento" placeholder="Nome Evento" required>
-                    <input type="text" class="input" name="attendees" placeholder="Attendees (Email)" required>
-                    <input type="datetime-local" class="input" name="data_evento" required>
+                    <input type="text" class="input-dash" name="nome_evento" placeholder="Nome Evento" required>
+                    <input type="text" class="input-dash" name="attendees" placeholder="Attendees (Email)" required>
+                    <input type="datetime-local" class="input-dash" name="data_evento" required>
                 </div>
                 <button class="button" type="submit">Aggiungi Evento</button>
             </form>
@@ -107,18 +107,18 @@ $eventi = $controllerEvento->getEventi();
                         <td class="button-container">
                             <button class="toggle-button button">Gestisci</button>
                             <div class="form-box" style="display: none;">
-                                <form class="form" action="admin_dashboard.php" method="post">
+                                <form class="form-dash" action="admin_dashboard.php" method="post">
                                     <input type="hidden" name="action" value="edit">
                                     <input type="hidden" name="id_evento" value="<?php echo $evento->getId(); ?>">
                                     <label for="nome_evento">Nuovo Nome Evento:</label>
-                                    <input type="text" class="input" name="nome_evento" value="<?php echo $evento->getNomeEvento(); ?>" placeholder="Nuovo Nome Evento">
+                                    <input type="text" class="input-dash" name="nome_evento" value="<?php echo $evento->getNomeEvento(); ?>" placeholder="Nuovo Nome Evento">
                                     <label for="attendees">Nuovi Attendees:</label>
-                                    <input type="text" class="input" name="attendees" value="<?php echo $evento->getAttendees(); ?>" placeholder="Nuovi Partecipanti">
+                                    <input type="text" class="input-dash" name="attendees" value="<?php echo $evento->getAttendees(); ?>" placeholder="Nuovi Partecipanti">
                                     <label for="data_evento">Nuova Data e Ora dell'Evento:</label>
-                                    <input type="datetime-local" class="input" name="data_evento" value="<?php echo date("Y-m-d\TH:i:s", strtotime($evento->getDataEvento())); ?>" placeholder="Nuova Data e Ora">
+                                    <input type="datetime-local" class="input-dash" name="data_evento" value="<?php echo date("Y-m-d\TH:i:s", strtotime($evento->getDataEvento())); ?>" placeholder="Nuova Data e Ora">
                                     <button class="button" type="submit">Modifica</button>
                                 </form>
-                                <form class="form" action="admin_dashboard.php" method="post" style="display: inline;">
+                                <form class="form-dash" action="admin_dashboard.php" method="post" style="display: inline;">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="indice" value="<?php echo $indice; ?>">
                                     <input type="hidden" name="id_evento" value="<?php echo $evento->getId(); ?>">
