@@ -122,6 +122,11 @@ p {
     align-self: center;
 }
 
+p a {
+    color: #005ce6;
+    text-decoration: underline;
+}
+
 /* admin-dashboard */
 
 .form-box {

@@ -67,7 +67,7 @@ if (isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['email']) 
 
 <body>
     <h1 class="reg">Crea il tuo account</h1>
-    <form action="" method="post">
+    <form class="form-log" action="" method="post">
         
 
         <?php if (isset($_GET['error'])) { ?>
@@ -75,16 +75,16 @@ if (isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['email']) 
         <?php } ?>
 
         <label>Inserisci il nome</label>
-        <input type="text" name="nome" placeholder="Mario"><br>
+        <input class="input-log" type="text" name="nome" placeholder="Mario"><br>
 
         <label>Inserisci il cognome</label>
-        <input type="text" name="cognome" placeholder="Rossi"><br>
+        <input class="input-log" type="text" name="cognome" placeholder="Rossi"><br>
 
         <label>Inserisci l'e-mail</label>
-        <input type="email" name="email" placeholder="name@example.com"><br>
+        <input class="input-log" type="email" name="email" placeholder="name@example.com"><br>
 
         <label>Inserisci la password</label>
-        <input type="password" name="password" placeholder="Scrivila qui"><br>
+        <input class="input-log" type="password" name="password" placeholder="Scrivila qui"><br>
 
         <button type="submit">Registrati</button>
 
