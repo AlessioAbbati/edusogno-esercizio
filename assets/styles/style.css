@@ -1,8 +1,8 @@
 body {
     background-image: url('../img/Registrazione.png');
-    background-size: cover;
     background-repeat: no-repeat;
-    background-position-y: -23;
+    background-size: cover;
+    background-position-y: -23rem;
     display: flex;
     justify-content: center;
     align-items: center;    
