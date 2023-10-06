@@ -1,6 +1,8 @@
 body {
-    background: #1690A7;
-    height: 100vh;
+    background-image: url('../img/Registrazione.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: -23;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,6 +23,7 @@ body {
     left: 0;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     border-bottom-left-radius: .7rem;
     border-bottom-right-radius: .7rem;
     
@@ -28,27 +31,26 @@ body {
     box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.7); /* Utilizza un'ombra bianca */
 }
 
+
 img {
     margin-left: 1rem;
     width: 7%;
 }
 
 .buttons {
-    display: flex;
-    margin-bottom: 4rem;
+    margin-right: 1rem;
 }
 
 button {
     background-color: #0066ff;
     color: #fff;
     border: 0;
-    border-radius: 24px;
+    border-radius: 12px;
     padding: 10px 16px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: background-color .3s ease;
-    margin-inline: 1rem;
 }
 
 button:hover {
@@ -63,14 +65,19 @@ a {
 .cards {
     display: flex;
     justify-content: center;
-    
+    margin-top: 2rem;
 }
 
 .card-body {
-    border: 1px solid white;
+    border: 1px solid #134077;
     border-radius: 1rem;
     display: flex;
     flex-direction: column;
     padding: 1rem;
     margin-inline: 2rem;
+}
+
+h1 {
+    color: #134077;
+    margin-top: 6rem;
 }

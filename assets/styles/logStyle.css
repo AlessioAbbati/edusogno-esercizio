@@ -1,9 +1,11 @@
 body {
-    background: #1690A7;
+    background-image: url('../img/Registrazione.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: -23;
     display: flex;
     justify-content: center;
     align-items: center;    
-    height: 100vh;
     flex-direction: column;
 }
 
@@ -20,6 +22,7 @@ form {
     border-radius: 15px;
     display: flex;
     flex-direction: column;
+    border: 1px solid #134077;
 }
 
 h2 {
@@ -41,6 +44,10 @@ label {
     font-size: 18px;
 }
 
+.buttons {
+    margin-right: 1rem;
+}
+
 button {
     background-color: #0066ff;
     color: #fff;
@@ -55,6 +62,11 @@ button {
 
 button:hover {
     opacity: .7;
+}
+
+a {
+    text-decoration: none;
+    color: white;
 }
 
 .error {
@@ -80,6 +92,7 @@ p {
     left: 0;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     border-bottom-left-radius: .7rem;
     border-bottom-right-radius: .7rem;
     
@@ -92,8 +105,9 @@ img {
     width: 7%;
 }
 
-.reg {
-    margin-top: 12rem;
+h1 {
+    color: #134077;
+    margin-top: 6rem;
 }
 
 

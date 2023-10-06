@@ -62,13 +62,14 @@ $eventi = $controllerEvento->getEventi();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/styles/dashStyle.css">
+    <link rel="stylesheet" href="assets/styles/dashStyle.css?v=<?php echo time(); ?>">
+
     <title>Pannello di Amministrazione</title>
 </head>
 
 <body>
     <h1>Pannello di Amministrazione</h1>
-    <button class="home"><a href="home.php">Pagina personale</a></button>
+    <!-- <button class="home"><a href="home.php">Pagina personale</a></button> -->
 
     <?php if ($_SESSION['admin'] === true) { ?>
 

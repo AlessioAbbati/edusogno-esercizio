@@ -1,0 +1,15 @@
+body {
+    background-image: url('../img/Registrazione.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: -23;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    flex-direction: column;
+}
+
+* {
+    font-family: sans-serif;
+    box-sizing: border-box;
+}

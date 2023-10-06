@@ -46,16 +46,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['nome']) && isset($_SESSION['cogno
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="assets/styles/homeStyle.css">
+        <link rel="stylesheet" href="assets/styles/homeStyle.css?v=<?php echo time(); ?>">
         <title>Home</title>
     </head>
 
     <body>
         <h1>Ciao, <?php echo $_SESSION['nome']; ?> <?php echo $_SESSION['cognome']; ?> ecco i tuoi eventi</h1>
         <div class="buttons">
-            <button><a href="logout.php">Logout</a></button>
-            <button><a href="recupera-password.php">Cambia la tua password</a></button>
-
             <?php
             if ($isAdmin) {
             ?>
