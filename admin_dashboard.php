@@ -105,43 +105,22 @@ $eventi = $controllerEvento->getEventi();
                         <td><?php echo $evento->getAttendees(); ?></td>
                         <td><?php echo $evento->getDataEvento(); ?></td>
                         <td class="button-container">
-                            <button class="toggle-button button">Gestisci</button>
-                            <div class="form-box" style="display: none;">
-                                <form class="form-dash" action="admin_dashboard.php" method="post">
-                                    <input type="hidden" name="action" value="edit">
-                                    <input type="hidden" name="id_evento" value="<?php echo $evento->getId(); ?>">
-                                    <label for="nome_evento">Nuovo Nome Evento:</label>
-                                    <input type="text" class="input-dash" name="nome_evento" value="<?php echo $evento->getNomeEvento(); ?>" placeholder="Nuovo Nome Evento">
-                                    <label for="attendees">Nuovi Attendees:</label>
-                                    <input type="text" class="input-dash" name="attendees" value="<?php echo $evento->getAttendees(); ?>" placeholder="Nuovi Partecipanti">
-                                    <label for="data_evento">Nuova Data e Ora dell'Evento:</label>
-                                    <input type="datetime-local" class="input-dash" name="data_evento" value="<?php echo date("Y-m-d\TH:i:s", strtotime($evento->getDataEvento())); ?>" placeholder="Nuova Data e Ora">
-                                    <button class="button" type="submit">Modifica</button>
-                                </form>
-                                <form class="form-dash" action="admin_dashboard.php" method="post" style="display: inline;">
-                                    <input type="hidden" name="action" value="delete">
-                                    <input type="hidden" name="indice" value="<?php echo $indice; ?>">
-                                    <input type="hidden" name="id_evento" value="<?php echo $evento->getId(); ?>">
-                                    <button class="button" type="submit">Elimina</button>
-                                </form>
-                            </div>
+                            <form class="form-dash" action="edit.php" method="get">
+                                <button class="toggle-button button">Modifica</button>
+                                <input type="hidden" name="id_evento" value="<?php echo $evento->getId(); ?>">
+                            </form>
+                            
+                            <form class="form-dash" action="admin_dashboard.php" method="post" style="display: inline;">
+                                <input type="hidden" name="action" value="delete">
+                                <input type="hidden" name="indice" value="<?php echo $indice; ?>">
+                                <input type="hidden" name="id_evento" value="<?php echo $evento->getId(); ?>">
+                                <button class="button" type="submit">Elimina</button>
+                            </form>
                         </td>
                     </tr>
                 <?php } ?>
             </tbody>
         </table>
-
-
-        <script>
-            // Aggiungi l'evento click al pulsante "Gestisci"
-            const toggleButtons = document.querySelectorAll(".toggle-button");
-            toggleButtons.forEach(button => {
-                button.addEventListener("click", function() {
-                    const formBox = this.nextElementSibling;
-                    formBox.style.display = (formBox.style.display === "none" || formBox.style.display === "") ? "block" : "none";
-                });
-            });
-        </script>
 
 
     <?php } else { ?>

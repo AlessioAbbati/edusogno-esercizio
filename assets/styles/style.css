@@ -211,4 +211,5 @@ tr:nth-child(even) {
 
 .button-container {
     text-align: right;
+    display: flex;
 }
