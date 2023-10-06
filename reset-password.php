@@ -1,4 +1,7 @@
 <?php
+session_start();
+
+include "header.php";
 
 $token = $_GET["token"];
 
@@ -35,6 +38,7 @@ if (strtotime($user["reset_token_expiration"]) <= time()) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/styles/style.css?v=<?php echo time(); ?>">
     <title>Reset password</title>
 </head>
 <body>
