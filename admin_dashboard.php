@@ -1,8 +1,13 @@
 <?php
 session_start();
 
-// Includi il file di connessione al database
-include("db_connection.php");
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
+require 'vendor/autoload.php';
+
+include "db_connection.php";
 include "header.php";
 
 // Simula l'autenticazione dell'amministratore (personalizza questa logica)
@@ -36,6 +41,46 @@ if ($_SESSION['admin'] === true) {
                     $attendees = $_POST['attendees'];
                     $data_evento = $_POST['data_evento'];
                     $controllerEvento->modificaEvento($id_evento, $nome_evento, $attendees, $data_evento);
+
+                    $email = explode(",", $_POST['attendees']);
+                    $newAttendees = implode(", ", $email);
+
+                    $mail = new PHPMailer(true);
+
+                    try {
+                        $mail->isSMTP();
+                        $mail->SMTPAuth   = true;
+                        $mail->Host       = 'smtp.mailtrap.io'; // Hostname di Mailtrap
+                        $mail->Username   = 'f530cb68dd7cef'; // Nome utente di Mailtrap
+                        $mail->Password   = '484e6396df6bd3'; // Password di Mailtrap
+                        $mail->SMTPSecure = 'tls';
+                        $mail->Port       = 2525; // Porta SMTP di Mailtrap
+                    
+                        $mail->setFrom('from@example.com');
+                        foreach ($email as $recipients) {
+                            $mail->addAddress($recipients);
+                        }
+                        $mail->addReplyTo('edusogno@exaple.com');
+                    
+                        $mail->isHTML(true);
+                        $mail->Subject = "Modifica evento";
+                        $mail->Body    = <<<EOD
+                        Il tuo evento: '$nome_evento', e' stato modificato dall'amministratore. Il nuovo evento e' il seguente:<br>
+                        NOME EVENTO: '$nome_evento'<br>
+                        PARTECIPANTI: '$newAttendees'<br>
+                        DATA EVENTO: '$data_evento'
+                        EOD;
+                        
+                        $mail->send();
+                        ?><div class="php_mess">
+                            <?php echo 'Il messaggio è stato inviato con successo ai partecipanti'; header('refresh:2'); ?>
+                        </div><?php 
+                        
+                    } catch (Exception $e) {
+                        ?><div class="php_mess">
+                            <?php echo "Impossibile inviare il messaggio. Errore Mailer: {$mail->ErrorInfo}"; ?>
+                        </div><?php 
+                    }
                 }
                 break;
 
@@ -43,8 +88,52 @@ if ($_SESSION['admin'] === true) {
                 if (isset($_POST['action']) && $_POST['action'] === 'delete') {
                     if (isset($_POST['id_evento'])) {
                         $idDaEliminare = $_POST['id_evento'];
+                        
+                        $mysqli = "SELECT * FROM eventi WHERE id='$idDaEliminare'";
+                        $result = mysqli_query($conn, $mysqli);
+                        $row = mysqli_fetch_assoc($result);
+
+                        $email = explode(",", $row['attendees']);
+                        $nome_evento = $row['nome_evento'];
+                        
+
+                        $mail = new PHPMailer(true);
+
+                        try {
+                            $mail->isSMTP();
+                            $mail->SMTPAuth   = true;
+                            $mail->Host       = 'smtp.mailtrap.io'; // Hostname di Mailtrap
+                            $mail->Username   = 'f530cb68dd7cef'; // Nome utente di Mailtrap
+                            $mail->Password   = '484e6396df6bd3'; // Password di Mailtrap
+                            $mail->SMTPSecure = 'tls';
+                            $mail->Port       = 2525; // Porta SMTP di Mailtrap
+
+                            $mail->setFrom('from@example.com');
+                            foreach ($email as $recipients) {
+                                $mail->addAddress($recipients);
+                            }
+                            $mail->addReplyTo('edusogno@exaple.com');
+
+                            $mail->isHTML(true);
+                            $mail->Subject = "Cancellazione evento";
+                            $mail->Body    = <<<EOD
+                            Il tuo evento: '$nome_evento', e' stato cancellato:<br>
+                            EOD;
+                            
+                            $mail->send();
+                            ?><div>
+                                <?php echo 'Il messaggio è stato inviato con successo ai partecipanti'; header('refresh:2'); ?>
+                            </div><?php 
+
+                        } catch (Exception $e) {
+                            ?><div>
+                                <?php echo "Impossibile inviare il messaggio. Errore Mailer: {$mail->ErrorInfo}"; ?>
+                            </div><?php 
+                        
+                        }
                         $controllerEvento->eliminaEvento($idDaEliminare);
-                    }
+                    } 
+
                 }
                 break;
         }
