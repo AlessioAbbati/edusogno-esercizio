@@ -72,14 +72,14 @@ if ($_SESSION['admin'] === true) {
                         EOD;
                         
                         $mail->send();
-                        ?><div class="php_mess">
+                        ?>
                             <?php echo 'Il messaggio è stato inviato con successo ai partecipanti'; header('refresh:2'); ?>
-                        </div><?php 
+                        <?php 
                         
                     } catch (Exception $e) {
-                        ?><div class="php_mess">
+                        ?>
                             <?php echo "Impossibile inviare il messaggio. Errore Mailer: {$mail->ErrorInfo}"; ?>
-                        </div><?php 
+                        <?php 
                     }
                 }
                 break;
@@ -121,14 +121,14 @@ if ($_SESSION['admin'] === true) {
                             EOD;
                             
                             $mail->send();
-                            ?><div>
+                            ?>
                                 <?php echo 'Il messaggio è stato inviato con successo ai partecipanti'; header('refresh:2'); ?>
-                            </div><?php 
+                            <?php 
 
                         } catch (Exception $e) {
-                            ?><div>
+                            ?>
                                 <?php echo "Impossibile inviare il messaggio. Errore Mailer: {$mail->ErrorInfo}"; ?>
-                            </div><?php 
+                            <?php 
                         
                         }
                         $controllerEvento->eliminaEvento($idDaEliminare);
